@@ -2,7 +2,7 @@
 
 This is the official implementation of **ScrambleMark: Zero-Query Watermark-Agnostic Black-Box Evasion of Modern Speech Watermarking**.
 
-> **Note for commercial platforms:** We provided the complete ScrambleMark codebase to the commercial platform approximately two months ago. The platform has therefore had sufficient time to incorporate corresponding updates.
+> **Note for commercial platforms:** We provided the complete ScrambleMark codebase to the commercial platform around July 2026, giving the platform sufficient time to develop and deploy corresponding mitigations or updates.
 
 ## 1. Create the Conda Environment
 
