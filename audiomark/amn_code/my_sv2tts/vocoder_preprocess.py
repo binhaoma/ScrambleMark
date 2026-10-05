@@ -1,0 +1,54 @@
+import argparse
+import os
+from pathlib import Path
+
+from synthesizer.hparams import hparams
+from synthesizer.synthesize import run_synthesis
+from my_sv2tts.argutils import print_args
+
+
+
+def run(datasets_root, existing_model):
+    class MyFormatter(argparse.ArgumentDefaultsHelpFormatter, argparse.RawDescriptionHelpFormatter):
+        pass
+
+    parser = argparse.ArgumentParser(
+        description="Creates ground-truth aligned (GTA) spectrograms from the vocoder.",
+        formatter_class=MyFormatter
+    )
+    parser.add_argument("--datasets_root", type=Path, default=datasets_root, help=\
+        "Path to the directory containing your SV2TTS directory. If you specify both --in_dir and "
+        "--out_dir, this argument won't be used.")
+    parser.add_argument("-s", "--syn_model_fpath", type=Path,
+                        default=None,
+                        help="Path to a saved synthesizer")
+    parser.add_argument("-i", "--in_dir", type=Path, default=argparse.SUPPRESS, help= \
+        "Path to the synthesizer directory that contains the mel spectrograms, the wavs and the "
+        "embeds. Defaults to  <datasets_root>/SV2TTS/synthesizer/.")
+    parser.add_argument("-o", "--out_dir", type=Path, default=argparse.SUPPRESS, help= \
+        "Path to the output vocoder directory that will contain the ground truth aligned mel "
+        "spectrograms. Defaults to <datasets_root>/SV2TTS/vocoder/.")
+    parser.add_argument("--hparams", default="", help=\
+        "Hyperparameter overrides as a comma-separated list of name=value pairs")
+    parser.add_argument("--cpu", action="store_true", help=\
+        "If True, processing is done on CPU, even when a GPU is available.")
+    args = parser.parse_args()
+    print_args(args, parser)
+    modified_hp = hparams.parse(args.hparams)
+
+    # keep all data
+    modified_hp.utterance_min_duration = 0.0
+    modified_hp.clip_mels_length = False
+
+    if not hasattr(args, "in_dir"):
+        args.in_dir = args.datasets_root / "SV2TTS" / "synthesizer"
+    if not hasattr(args, "out_dir"):
+        args.out_dir = args.datasets_root / "SV2TTS" / "vocoder"
+
+    if args.cpu:
+        # Hide GPUs from Pytorch to force CPU processing
+        os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
+    run_synthesis(args.in_dir, args.out_dir, args.syn_model_fpath, modified_hp, existing_model)
+
+    return args.out_dir

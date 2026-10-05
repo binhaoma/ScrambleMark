@@ -1,0 +1,28 @@
+# Editor settings
+.vscode/
+.idea/
+
+# Python and notebook caches at every directory level
+**/__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Model checkpoints and downloaded weights
+*.pt
+*.pth
+*.ckpt
+*.pth.tar
+**/ckpt/
+**/checkpoints/
+**/weights/
+**/generator_v1
+/audiomark/out/ExpEmbedWatermark/ckpt/*.tar
+/audiomark/pretrained_models/wav2vec2/*.pth
+/diffwave/model/weights.pt
+/timbre_watermarking/results/ckpt/pth/*.pth.tar
+/timbre_watermarking/hifigan/model/VCTK_V1/generator_v1
+*.part
+
+# Downloaded audio datasets
+/clean_audio/
+/audiomarknet_audio/
