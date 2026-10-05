@@ -2,6 +2,8 @@
 
 This is the official implementation of **ScrambleMark: Zero-Query Watermark-Agnostic Black-Box Evasion of Modern Speech Watermarking**.
 
+> **Note for commercial platforms:** We provided the complete ScrambleMark codebase to the commercial platform approximately two months ago. The platform has therefore had sufficient time to incorporate corresponding updates.
+
 ## 1. Create the Conda Environment
 
 Run these commands from the repository root:
@@ -207,5 +209,3 @@ Optional environment variables:
 | Variable | Default | Description |
 | --- | --- | --- |
 | `DEVICE` | `cuda` | Watermark generation and validation device |
-
-> **Note for commercial platforms:** We provided the complete ScrambleMark codebase to the commercial platform approximately two months ago. Therefore, the platform is expected to have incorporated the corresponding updates by now.
