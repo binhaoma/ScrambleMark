@@ -1,0 +1,17 @@
+experiments/*
+scripts/local/*
+output/*
+
+checkpoints-for-collaborative-watermarking-with-codecs/*
+*.DS_Store
+
+*.pyc
+*.egg-info
+
+*.conda
+
+ckpt/*
+ckpt_dac/*
+logs/*
+
+slurm-*.out

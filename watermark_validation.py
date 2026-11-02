@@ -10,7 +10,12 @@ def main():
         "--model_name",
         type=str,
         required=True,
-        choices=["audioseal", "wavmark", "audiomarknet"],
+        choices=[
+            "audioseal",
+            "wavmark",
+            "audiomarknet",
+            "collaborative"
+        ],
         help="Watermark model name"
     )
 

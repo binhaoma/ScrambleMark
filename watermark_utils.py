@@ -12,7 +12,20 @@ import audiomark.amn_code.exp_setup as exp_setup
 from audiomark.amn_code.exp.ExpEmbedWatermark import ExpEmbedWatermark, ExpConfig as ExpEmbedWatermarkCfg
 import os
 import gc
+from collaborative_watermarking_with_codecs.src.collaborative_watermarking.render.render_hifigan import render_hifigan
 
+from collaborative_watermarking_with_codecs.src.collaborative_watermarking.models.watermark import WatermarkModel
+from collaborative_watermarking_with_codecs.src.collaborative_watermarking.third_party.hifi_gan.env import AttrDict
+from collaborative_watermarking_with_codecs.src.collaborative_watermarking.third_party.hifi_gan.utils import scan_checkpoint, load_checkpoint
+import json
+
+
+COLLABORATIVE_CHECKPOINT_DIR = (
+    Path(__file__).resolve().parent
+    / 'collaborative_watermarking_with_codecs'
+    / 'checkpoints-for-collaborative-watermarking-with-codecs'
+    / 'collab-dac'
+)
 
 def get_wm_pool(speaker, speakers_wm_lst):
     """Return the AudioMarkNet watermark pool and the requested speaker index."""
@@ -54,6 +67,10 @@ def load_model(model_name, device):
 
         return model
 
+    elif model_name == 'collaborative':
+        # render_hifigan loads the Collaborative generator itself.
+        return None
+
 
     else:
         raise ValueError(
@@ -78,7 +95,33 @@ def load_detector_model(model_name, device):
         detector.eval()
 
         return detector
-    
+
+    elif model_name == 'collaborative':
+        config_path = COLLABORATIVE_CHECKPOINT_DIR / 'config.json'
+        with config_path.open(encoding='utf-8') as config_file:
+            config = AttrDict(json.load(config_file))
+
+        checkpoint_path = scan_checkpoint(
+            str(COLLABORATIVE_CHECKPOINT_DIR),
+            'wm_'
+        )
+        if checkpoint_path is None:
+            raise FileNotFoundError(
+                'No Collaborative watermark checkpoint (wm_*) found in: '
+                f'{COLLABORATIVE_CHECKPOINT_DIR}'
+            )
+
+        state_dict_wm = load_checkpoint(checkpoint_path, device)
+        detector = WatermarkModel(
+            model_type=config.watermark_model,
+            sample_rate=config.sampling_rate,
+            config=config
+        ).to(device)
+        detector.load_state_dict(state_dict_wm['watermark'])
+        detector.eval()
+
+        return detector
+
     elif model_name == 'audiomarknet':
         from audiomark.amn_code.models.ModelTrainer import ModelTrainer
 
@@ -149,10 +192,11 @@ def watermark_audio_generation(model_name, input_dir, output_dir=None, device='c
                 output_dir = f'{model_name}_watermark_audio'
 
             output_dir_audio = os.path.join(output_dir, 'data')
-            output_dir_msg = os.path.join(output_dir, 'msg')
-
             os.makedirs(output_dir_audio, exist_ok=True)
-            os.makedirs(output_dir_msg, exist_ok=True)
+
+            if model_name != 'collaborative':
+                output_dir_msg = os.path.join(output_dir, 'msg')
+                os.makedirs(output_dir_msg, exist_ok=True)
 
         audios = [
             audio_name
@@ -240,6 +284,14 @@ def watermark_audio_generation(model_name, input_dir, output_dir=None, device='c
                             .cpu(),
                         16000
                     )
+        elif model_name == 'collaborative':
+            render_hifigan(
+                config=COLLABORATIVE_CHECKPOINT_DIR / 'config.json',
+                input_wavs_dir=input_dir,
+                output_wavs_dir=output_dir_audio,
+                checkpoint_path=COLLABORATIVE_CHECKPOINT_DIR,
+            )
+
     finally:
         del model
         gc.collect()
@@ -341,6 +393,41 @@ def WM_validation(model_name, watermark_dir, audio_subdir='data', device='cuda')
             print(f"Attack success count: {attack_success_count}/{len(audios)}")
             print(f"ASR: {asr:.4f}")
         
+        elif model_name == 'collaborative':
+            detection_score_list = []
+            attack_success_count = 0
+
+            with torch.no_grad():
+                for audio_name in tqdm(audios, desc="Collaborative validation", unit="audio"):
+                    audio_path = os.path.join(audio_dir, audio_name)
+                    signal, _ = librosa.load(audio_path, sr=22050)
+
+                    wav = (
+                        torch.tensor(signal, dtype=torch.float32)
+                        .unsqueeze(0)
+                        .unsqueeze(0)
+                        .to(device)
+                    )
+                    _, result = detector(wav, wav)
+                    detection_score = 1.0 - result.mean().item()
+                    detection_score_list.append(detection_score)
+
+                    if detection_score <= 0.5:
+                        attack_success_count += 1
+
+            avg_detection_score = (
+                sum(detection_score_list) / len(detection_score_list)
+            )
+            asr = attack_success_count / len(audios)
+            detection_accuracy = 1.0 - asr
+
+            print("\nModel: Collaborative")
+            print(f"Number of audio files: {len(audios)}")
+            print(f"Average detection score: {avg_detection_score:.4f}")
+            print(f"Detection accuracy: {detection_accuracy:.4f}")
+            print(f"Attack success count: {attack_success_count}/{len(audios)}")
+            print(f"ASR: {asr:.4f}")
+
         elif model_name == 'audiomarknet':
 
             exp_cfg = exp_setup.init_config()

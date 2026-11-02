@@ -66,6 +66,39 @@ CHECKPOINTS = (
         size=55_788_858,
         sha256="27cdeb835874516f9404d6c1a9ea229b092fd98c329b8444f5955c24cf7b29a1",
     ),
+    Checkpoint(
+        name="Collaborative config",
+        file_id="1ijUSCyJvQ3KKvc0gceDViUjTaNvzN3-c",
+        relative_path=(
+            "collaborative_watermarking_with_codecs/"
+            "checkpoints-for-collaborative-watermarking-with-codecs/"
+            "collab-dac/config.json"
+        ),
+        size=1_073,
+        sha256="e8cf4f514443d15d36b4d012f1cf2ab6e62fd2946ead5f4c79bfa04efb92255d",
+    ),
+    Checkpoint(
+        name="Collaborative HiFi-GAN generator",
+        file_id="1bZuVWEgk1BQGC4S2fAxFiI_jIsrosGQo",
+        relative_path=(
+            "collaborative_watermarking_with_codecs/"
+            "checkpoints-for-collaborative-watermarking-with-codecs/"
+            "collab-dac/g_00040000"
+        ),
+        size=55_824_872,
+        sha256="5a1c2c0ee39dffc9b8dc628d3f03381089de876d7248e060a07dd9a663914747",
+    ),
+    Checkpoint(
+        name="Collaborative AASIST detector",
+        file_id="1XqaQk6fkwqYhONLoMUyrtoP5J0eQI-hY",
+        relative_path=(
+            "collaborative_watermarking_with_codecs/"
+            "checkpoints-for-collaborative-watermarking-with-codecs/"
+            "collab-dac/wm_00040000"
+        ),
+        size=4_313_692,
+        sha256="513e9beae4e1efc3fc1bd5568721c22a87be957287a21d17dba2ee7199df75a2",
+    ),
 )
 
 

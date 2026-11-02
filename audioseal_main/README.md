@@ -129,8 +129,8 @@ Interested in training your own watermarking model? Check out our [training docu
 
 # :bug: Troubleshooting
 
-- If you encounter the error `ValueError: not enough values to unpack (expected 3, got 2)`, this is because we expect a batch of audio  tensors as inputs. Add one
-dummy batch dimension to your input (e.g. `wav.unsqueeze(0)`, see [example notebook for getting started](examples/Getting_started.ipynb)).
+- If you encounter the error `ValueError: not enough values to unpack (expected 3, got 2)`, this is because we expect a batch of audio tensors as inputs. Add one
+dummy batch dimension to your input (e.g. `wav.unsqueeze(0)`).
 
 - In Windows machines, if you encounter the error `KeyError raised while resolving interpolation: "Environmen variable 'USER' not found"`: This is due to an old checkpoint
 uploaded to the model hub, which is not compatible in Windows. Try to invalidate the cache by removing the files in `C:\Users\<USER>\.cache\audioseal`

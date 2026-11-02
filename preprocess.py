@@ -22,7 +22,7 @@ from argparse import ArgumentParser
 from concurrent.futures import ProcessPoolExecutor
 from glob import glob
 from tqdm import tqdm
-from GT_utils import *
+from scrambler_utils import *
 from diffwave.params import params
 
 

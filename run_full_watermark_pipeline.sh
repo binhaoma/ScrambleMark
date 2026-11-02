@@ -5,10 +5,10 @@ set -Eeuo pipefail
 usage() {
   cat <<'EOF'
 Usage:
-  ./run_full_watermark_pipeline.sh {audioseal|wavmark} INPUT_DIR WATERMARK_DIR [--num-samples N]
+  ./run_full_watermark_pipeline.sh {audioseal|wavmark|collaborative} INPUT_DIR WATERMARK_DIR [--num-samples N]
   ./run_full_watermark_pipeline.sh audiomarknet [WATERMARK_AUDIO_DIR] [RESULT_DIR] [--num-samples N]
 
-AudioSeal/WavMark arguments:
+AudioSeal/WavMark/Collaborative arguments:
   INPUT_DIR      Directory containing the original clean audio
   WATERMARK_DIR  Root directory used for generated watermark results
 
@@ -38,6 +38,7 @@ Optional environment variables:
 Examples:
   ./run_full_watermark_pipeline.sh audioseal ./clean_audio ./audioseal_results --num-samples 10
   ./run_full_watermark_pipeline.sh wavmark ./clean_audio ./wavmark_results --num-samples 20
+  ./run_full_watermark_pipeline.sh collaborative ./clean_audio ./collaborative_results --num-samples 10
   ./run_full_watermark_pipeline.sh audiomarknet --num-samples 10
 EOF
 }
@@ -45,6 +46,11 @@ EOF
 if [[ $# -lt 1 ]]; then
   usage >&2
   exit 2
+fi
+
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  usage
+  exit 0
 fi
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
@@ -85,7 +91,7 @@ if [[ -n "${TEST_SAMPLE_COUNT}" && ! "${TEST_SAMPLE_COUNT}" =~ ^[1-9][0-9]*$ ]];
 fi
 
 case "${MODEL_NAME}" in
-  audioseal|wavmark)
+  audioseal|wavmark|collaborative)
     if [[ ${#POSITIONAL_ARGS[@]} -ne 2 ]]; then
       usage >&2
       exit 2
@@ -103,7 +109,7 @@ case "${MODEL_NAME}" in
     WATERMARK_DIR="${POSITIONAL_ARGS[1]:-${SCRIPT_DIR}/audiomarknet_results}"
     ;;
   *)
-    echo "Error: MODEL_NAME must be audioseal, wavmark, or audiomarknet; got: ${MODEL_NAME}" >&2
+    echo "Error: MODEL_NAME must be audioseal, wavmark, collaborative, or audiomarknet; got: ${MODEL_NAME}" >&2
     exit 2
     ;;
 esac
