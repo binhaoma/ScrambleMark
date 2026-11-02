@@ -250,7 +250,7 @@ Optional environment variables:
 
 ---
 
-## 5. Single-Audio Scrambler Fine-Tuning (`run_single_audio_scrambler_finetune.sh`)
+## 5. Dynamic Fine-Tuning (`run_single_audio_scrambler_finetune.sh`)
 
 Runs the complete single-audio scrambler fine-tuning workflow:
 
