@@ -81,9 +81,7 @@ Collaborative example:
 
 Collaborative renders watermarked speech at 22.05 kHz using the bundled
 `collab-dac` generator. Its watermark is a binary detection task rather than a
-bit-message task, so it does not create a `msg/` directory. Validation reports
-the average detection score and counts an attack as successful when the score
-is at most `0.5`.
+bit-message task, so it does not create a `msg/` directory.
 
 ### AudioMarkNet
 
