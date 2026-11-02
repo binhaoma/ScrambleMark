@@ -295,7 +295,7 @@ Use a different checkpoint with:
 --pretrained-checkpoint ./path/to/weights.pt
 ```
 
-### Fine-Tuning
+### Dynamic Fine-Tuning
 
 This pipeline uses the generated scrambler audio to fine-tune the model for the
 selected input audio.
