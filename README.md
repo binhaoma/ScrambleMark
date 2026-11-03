@@ -353,7 +353,7 @@ If you find ScrambleMark useful in your research, please cite our paper:
 ```bibtex
 @INPROCEEDINGS{27scramblemark-sp,
   author    = {Binhao Ma and Weikang Ding and Hanqing Guo and Wenwei Zhao and Xiaowen Li and Leah Ding and Zhuo Lu and Rui Duan},
-  title     = {{ScrambleMark}: Zero-Query Watermark-Agnostic Black-Box Evasion of Modern Speech Watermarking},
+  title     = {Scramble{M}ark: Zero-Query Watermark-Agnostic Black-Box Evasion of Modern Speech Watermarking},
   booktitle = {Proc. of IEEE Symposium on Security and Privacy (S\&P)},
   month     = {May},
   year      = {2027}
