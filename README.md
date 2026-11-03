@@ -2,6 +2,8 @@
 
 This is the official implementation of **ScrambleMark: Zero-Query Watermark-Agnostic Black-Box Evasion of Modern Speech Watermarking**.
 
+The project demo and paper are available via the buttons below.
+
 <p>
   <a href="https://scramblemark.github.io/"><img src="https://img.shields.io/badge/Demo-Live%20Website-4285F4?style=flat-square&logo=googlechrome&logoColor=white" alt="Demo"></a>
   <a href="https://binhaoma.github.io/ScrambleMark/ScrambleMark.pdf"><img src="https://img.shields.io/badge/Paper-View%20PDF-D32F2F?style=flat-square&logo=adobeacrobatreader&logoColor=white" alt="Paper"></a>
