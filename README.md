@@ -2,6 +2,11 @@
 
 This is the official implementation of **ScrambleMark: Zero-Query Watermark-Agnostic Black-Box Evasion of Modern Speech Watermarking**.
 
+<p>
+  <a href="https://scramblemark.github.io/"><img src="https://img.shields.io/badge/Demo-Live%20Website-4285F4?style=flat-square&logo=googlechrome&logoColor=white" alt="Demo"></a>
+  <a href="https://binhaoma.github.io/ScrambleMark/ScrambleMark.pdf"><img src="https://img.shields.io/badge/Paper-View%20PDF-D32F2F?style=flat-square&logo=adobeacrobatreader&logoColor=white" alt="Paper"></a>
+</p>
+
 > **Note for commercial platforms:** We provided the complete ScrambleMark codebase to the commercial platform around July 2026, giving the platform sufficient time to develop and deploy corresponding mitigations or updates.
 
 ## 1. Create the Conda Environment
@@ -79,8 +84,7 @@ Collaborative example:
   --num-samples 10
 ```
 
-Collaborative renders watermarked speech at 22.05 kHz using the bundled
-`collab-dac` generator. Its watermark is a binary detection task rather than a
+Collaborative watermark is a binary detection task rather than a
 bit-message task, so it does not create a `msg/` directory.
 
 ### AudioMarkNet
@@ -338,4 +342,18 @@ RESULT_DIR/
 │   └── finetune_metadata.json
 ├── finetuned_audio/                # Final fine-tuned DiffWave output
 └── finetuned_validation.log
+```
+
+## Citation
+
+If you find ScrambleMark useful in your research, please cite our paper:
+
+```bibtex
+@INPROCEEDINGS{27scramblemark-sp,
+  author    = {Binhao Ma and Weikang Ding and Hanqing Guo and Wenwei Zhao and Xiaowen Li and Leah Ding and Zhuo Lu and Rui Duan},
+  title     = {{ScrambleMark}: Zero-Query Watermark-Agnostic Black-Box Evasion of Modern Speech Watermarking},
+  booktitle = {Proc. of IEEE Symposium on Security and Privacy (S\&P)},
+  month     = {May},
+  year      = {2027}
+}
 ```
