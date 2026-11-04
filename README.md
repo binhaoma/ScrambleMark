@@ -9,7 +9,7 @@ Please find the demo and paper via the buttons below.
   <a href="https://binhaoma.github.io/ScrambleMark/ScrambleMark.pdf"><img src="https://img.shields.io/badge/Paper-View%20PDF-D32F2F?style=flat-square&logo=adobeacrobatreader&logoColor=white" alt="Paper"></a>
 </p>
 
-> **Commercial Platform Updates and Misuse Prevention:** We shared the complete ScrambleMark codebase with the evaluated commercial platforms around July 2026, allowing sufficient time for security improvements and mitigations. Most platforms may have since implemented updates to address the identified vulnerabilities.
+> **Commercial Platform Updates and Misuse Prevention:** We shared the complete ScrambleMark codebase with the evaluated commercial platforms around July 2026, allowing sufficient time for security improvements and mitigations. Most platforms have implemented updates to address the identified vulnerabilities.
 
 ## Citation
 
