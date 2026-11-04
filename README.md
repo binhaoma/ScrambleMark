@@ -265,17 +265,16 @@ Optional environment variables:
 
 ## 5. Dynamic Fine-Tuning (`run_single_audio_scrambler_finetune.sh`)
 
-Runs the complete single-audio scrambler fine-tuning workflow:
+If you want to generate ScrambleMark samples from scratch rather than using the pretrained model, this pipeline walks you through the complete fine-tuning process using a single watermarked audio sample:
 
-1. Generate one watermarked audio file from a clean input.
-2. Validate the generated watermark.
+1. Generate watermarked audio from a clean speech sample.
+2. Verify that the watermark is successfully embedded.
 3. Generate multiple distinct scrambler targets from the watermarked audio.
-4. Fine-tune DiffWave with the watermarked audio as the condition and the scrambler
-   audio files as targets.
-5. Run inference with the fine-tuned checkpoint.
-6. Validate the target watermark in the final generated audio.
+4. Fine-tune DiffWave using the watermarked audio as the condition and the generated scrambler samples as training targets.
+5. Use the fine-tuned model to generate the final scrambler audio.
+6. Evaluate whether the watermark remains detectable in the final output.
 
-AudioSeal, WavMark, and Collaborative are supported.
+Supported watermarking methods: AudioSeal, WavMark, and Collaborative.
 
 ### Usage
 
