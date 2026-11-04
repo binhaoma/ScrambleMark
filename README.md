@@ -263,7 +263,7 @@ Optional environment variables:
 
 ---
 
-## 5. Dynamic Fine-Tuning (`run_single_audio_scrambler_finetune.sh`)
+## Generate ScrambleMark Samples from Scratch
 
 If you want to generate ScrambleMark samples from scratch rather than using the pretrained model, this pipeline walks you through the complete fine-tuning process using a single watermarked audio sample:
 
