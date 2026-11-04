@@ -163,14 +163,9 @@ Optional environment variables:
 
 ## 4. Scrambler Generation (`run_full_watermark_scrambler_pipeline.sh`)
 
-Runs watermark generation, scrambler generation, and watermark validation on
-the original watermarked audio and scrambler audio.
+Runs watermark generation, scrambler generation using the pretrained ScrambleMark model, and watermark validation on both the original watermarked audio and the scrambler audio.
 
-This pipeline provides a lightweight way to evaluate the transferability of
-ScrambleMark on your own speech audio without fine-tuning a model. The generated
-scrambler samples exhibit similar transferability to ScrambleMark, making this
-pipeline useful for quickly evaluating transferability across different speech
-watermarking methods.
+This pipeline provides a lightweight way to evaluate the transferability of ScrambleMark on your own speech audio without any additional training or fine-tuning.
 
 ### AudioSeal, WavMark, or Collaborative
 
