@@ -68,7 +68,7 @@ Existing valid checkpoints and downloaded audio files are skipped. Interrupted d
 
 ## 3. `run_full_watermark_pipeline.sh`
 
-Runs watermark generation, ScrambleMark, and watermark validation before and after ScrambleMark.
+This script prepares the complete evaluation environment. It first sets up the watermarking models and generates watermarked speech samples. It then applies ScrambleMark to these samples and runs watermark detection on the attacked speech to evaluate the effectiveness of the attack.
 
 ### AudioSeal, WavMark, or Collaborative
 
