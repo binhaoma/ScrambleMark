@@ -41,7 +41,7 @@ Collaborative Watermarking is imported directly from the bundled
 `./collaborative_watermarking_with_codecs` source tree, while its HiFi-GAN and
 AASIST runtime dependencies are installed by `environment.yml`.
 
-> **Note:** This repository uses a customized version of `python-stretch` that includes project-specific function mappings required by ScrambleMark. Please make sure to install and use the `python-stretch` package provided in this GitHub repository rather than another version from external sources.
+> **Note:** This repository provides a version of python-stretch in which we mapped the underlying C++ functions required by ScrambleMark into Python. Please install and use the python-stretch package from this repository rather than a version from an external source.
 
 ## 2. Download Project Assets
 
