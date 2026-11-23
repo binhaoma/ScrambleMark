@@ -11,7 +11,7 @@ Please find the demo and paper via the buttons below.
 
 ## 📰 News
 
-- 🏆 The ScrambleMark vulnerability report by Binhao Ma and Prof. Rui Duan received an **Honorable Mention** from the **Google AI Vulnerability Reward Program (AI VRP)**.
+- 🏆 The ScrambleMark vulnerability report received an **Honorable Mention** from the **Google AI Vulnerability Reward Program (AI VRP)**.
 
 > **Commercial Platform Updates and Misuse Prevention:** We shared the complete ScrambleMark codebase with the evaluated commercial platforms around July 2026, allowing sufficient time for security improvements and mitigations. Most platforms have implemented updates to address the identified vulnerabilities.
 
